@@ -1,0 +1,52 @@
+p{
+    font-weight: bold;
+    font-size: 20px;
+}
+
+#top{
+    text-decoration:underline;
+}
+
+.emphasizedText{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: rgb(84, 82, 82);
+}
+
+.empText{
+    font-style:italic;
+    font-size: larger;
+    color: rgb(86, 93, 229);
+}
+
+body{
+    background-color: rgb(199, 205, 210);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align:center;
+    border: 5px solid black;
+    margin: 20px;
+    padding: 10px;
+
+
+}
+
+.centered-list{
+    padding-left:0;
+    list-style-position: outside;
+    margin: 0 auto;
+    display: table;
+    text-align: left;
+}
+
+ol.centered-list {
+    margin-left: 30px;
+  }
+
+  .floating-note {
+    position: absolute;
+    top: 850px;
+    right: 30px;
+    background-color: white;
+    padding: 10px;
+    border: 2px solid black;
+    font-weight: bold;
+}

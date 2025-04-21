@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Rhyme Finder Game</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f9f9f9;
+        margin: 0;
+        padding: 40px;
+        text-align: center;
+      }
+
+      h1 {
+        color: #333;
+      }
+
+      input[type="text"] {
+        padding: 10px;
+        font-size: 16px;
+        width: 250px;
+        margin-right: 10px;
+      }
+
+      button {
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+
+      #results {
+        margin-top: 30px;
+        padding: 20px;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        display: inline-block;
+        text-align: left;
+      }
+
+      ul {
+        padding-left: 20px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>🎵 Rhyme Finder Game</h1>
+    <p>Type a word below to see 5 rhyming words:</p>
+    <input type="text" id="wordInput" placeholder="e.g. piano" />
+    <button onclick="findRhymes()">Find Rhymes</button>
+
+    <div id="results" style="display: none;">
+      <h3>Rhyming Words:</h3>
+      <ul id="rhymeList"></ul>
+    </div>
+
+    <script>
+      function findRhymes() {
+        const word = document.getElementById("wordInput").value.trim();
+        const rhymeList = document.getElementById("rhymeList");
+        const resultsDiv = document.getElementById("results");
+
+        if (!word) {
+          alert("Please enter a word!");
+          return;
+        }
+
+        fetch(`https://api.datamuse.com/words?rel_rhy=${word}&max=5`)
+          .then((response) => response.json())
+          .then((data) => {
+            rhymeList.innerHTML = ""; // Clear previous results
+
+            if (data.length === 0) {
+              rhymeList.innerHTML = "<li>No rhymes found 😢</li>";
+            } else {
+              data.forEach((item) => {
+                const li = document.createElement("li");
+                li.textContent = item.word;
+                rhymeList.appendChild(li);
+              });
+            }
+
+            resultsDiv.style.display = "block";
+          })
+          .catch((error) => {
+            console.error("Error fetching rhymes:", error);
+            rhymeList.innerHTML = "<li>Oops! Something went wrong.</li>";
+            resultsDiv.style.display = "block";
+          });
+      }
+    </script>
+  </body>
+</html>
